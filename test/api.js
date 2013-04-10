@@ -44,38 +44,3 @@ function oauthFlowTest(t) {
 }
 
 app.listen(3000);
-
-//exports.middleware = function (finalWare) {
-//    app.get('/start', function (req, res) {
-//        var reqTokenUrl = "https://api.dropbox.com/1/oauth/request_token";
-//        var oa = new OAuth(reqTokenUrl, reqTokenUrl, "pmp04j615brrckx", "qjuo453q0z9ss6i", "1.0", "http://localhost:3000/auth/end", "PLAINTEXT");
-//
-//        oa.getOAuthRequestToken(function (error, oauth_token, oauth_token_secret) {
-//            req.session.oauth = {
-//                oauth_token: oauth_token,
-//                oauth_token_secret: oauth_token_secret
-//            };
-//            res.redirect(
-//                "https://www.dropbox.com/1/oauth/authorize?oauth_token=" + oauth_token +
-//                    "&oauth_token_secret=" + oauth_token_secret +
-//                    "&oauth_callback=http://localhost:3000/auth/end"
-//            );
-//        });
-//    });
-//
-//    app.get('/end', oAuthAccessToken, finalWare, function (req, res) {
-//        res.render("authSuccess");
-//    });
-//
-//    function oAuthAccessToken(req, res, next) {
-//        var accTokenUrl = "https://api.dropbox.com/1/oauth/access_token";
-//        var oa = new OAuth(accTokenUrl, accTokenUrl, "pmp04j615brrckx", "qjuo453q0z9ss6i", "1.0", "http://localhost:3000/auth/end", "PLAINTEXT");
-//
-//        req.oauth = req.session.oauth;
-//        oa.getOAuthAccessToken(req.query.oauth_token, req.oauth.oauth_token_secret, function (error, oauth_access_token, oauth_access_token_secret) {
-//            req.oauth.oauth_access_token = oauth_access_token;
-//            req.oauth.oauth_access_token_secret = oauth_access_token_secret;
-//            next();
-//        });
-//    }
-//};
