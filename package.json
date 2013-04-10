@@ -8,7 +8,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git@spal.no-ip.org:doxbee/oauth-flow.git"
+        "url": "git@github.com:doxout/node-oauth-flow.git"
     },
     "keywords": [
         "oauth",
