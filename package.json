@@ -1,19 +1,24 @@
 {
-  "name": "oauth-flow",
-  "version": "0.0.0",
-  "description": "OAuth flow module",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@spal.no-ip.org:doxbee/oauth-flow.git"
-  },
-  "keywords": [
-    "oauth",
-    "flow"
-  ],
-  "author": "CreationPal",
-  "license": "Proprietary"
+    "name": "oauth-flow",
+    "version": "0.0.0",
+    "description": "OAuth flow module",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@spal.no-ip.org:doxbee/oauth-flow.git"
+    },
+    "keywords": [
+        "oauth",
+        "flow"
+    ],
+    "dependencies": {
+        "express": "*",
+        "flask-router-plus": "*",
+        "oauth": "*"
+    },
+    "author": "CreationPal",
+    "license": "Proprietary"
 }
