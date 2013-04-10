@@ -25,16 +25,20 @@ function oauthFlowTest(t) {
     t.expect(0);
 
     app.use('/auth/dropbox', oauthFlow({
-        requestTokenUrl: "https://api.dropbox.com/1/oauth/request_token",
-        authorizationUrl: "https://www.dropbox.com/1/oauth/authorize",
-        accessTokenUrl: "https://api.dropbox.com/1/oauth/access_token",
-        appKey: "pmp04j615brrckx",
-        appSecret: "qjuo453q0z9ss6i",
-        callbackUrl: "http://localhost:3000/auth/dropbox/end",
-        version: "1.0",
-        type: "PLAINTEXT"
+        provider: {
+            requestTokenUrl: "https://api.dropbox.com/1/oauth/request_token",
+            authorizationUrl: "https://www.dropbox.com/1/oauth/authorize",
+            accessTokenUrl: "https://api.dropbox.com/1/oauth/access_token",
+            version: "1.0",
+            type: "PLAINTEXT"
+        },
+        user: {
+            appKey: "pmp04j615brrckx",
+            appSecret: "qjuo453q0z9ss6i"
+        }
     }, function (req, res, next) {
         console.log(req.oauth);
+        res.end('done');
         t.done();
     }));
 }
