@@ -51,19 +51,17 @@ describe('oauth flow', function() {
         });        
         browser.visit("http://localhost:3000/auth/dropbox/start")
         .then(function () {
-            console.log("step 1");
             // Fill email, password and submit form
             return browser.
-                fill("login_email",  "m8r-sphnmi@mailinator.com").
+                fill("login_email",        "m8r-sphnmi@mailinator.com").
                 fill("login_password",     "test123").
                 pressButton("Sign in");
 
         }).then(function() {
-            console.log("step 2");
             return browser.
                 pressButton('Allow');
         }).then(function() {
-            console.log("step 3");
+        
         }, function(err) {
             throw err;
         }); 
