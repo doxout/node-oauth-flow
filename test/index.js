@@ -5,6 +5,9 @@ var http = require('http');
 
 var oauthFlow = require('../index.js');
 
+var expect = require('chai').expect;
+
+
 describe('oauth flow', function() {
     var app, browser, server;
 
@@ -39,7 +42,8 @@ describe('oauth flow', function() {
                 appSecret: "qjuo453q0z9ss6i"
             }
         }, function (req, res) {
-            console.log(req.oauth);
+            expect(req.oauth).to.have.property('oauth_access_token_secret');
+            expect(req.oauth).to.have.property('oauth_access_token');
             res.end('done');
             done();
         });
