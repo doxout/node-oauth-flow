@@ -34,15 +34,15 @@ This middleware doesn't assume that you wish to use it for user authentication.
 Instead, it only implements the oAuth authorization flow. What it does is
 install 2 routes:
 
-* /auth/dropbox/start
-* /auth/dropbox/end
+* `/auth/dropbox/start`
+* `/auth/dropbox/end`
 
 Point the user to /auth/dropbox/start when you want them to authorize to
 the app. You can add custom parameters to the url.
 
-After the user authorizes your app, he will be redirected to /auth/dropbox/end
+After the user authorizes your app, he will be redirected to `/auth/dropbox/end`
 There, oauth-flow will put the authorization parameters in req.oauth then
-call your custom callback. Custom parameters from /auth/dropbox/start will
+call your custom middleware. Custom parameters from `/auth/dropbox/start` will
 also be passed.
 
 What you do afterwards with the authorization data is entirely up to you.
