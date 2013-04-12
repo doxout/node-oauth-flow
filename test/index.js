@@ -42,6 +42,8 @@ describe('oauth flow', function() {
                 appSecret: "qjuo453q0z9ss6i"
             }
         }, function (req, res) {
+            expect(req.query).to.have.property('test');
+            expect(req.query).to.have.property('other');
             expect(req.oauth).to.have.property('oauth_access_token_secret');
             expect(req.oauth).to.have.property('oauth_access_token');
             res.end('done');
@@ -53,7 +55,7 @@ describe('oauth flow', function() {
         var browser = new zombie({
             userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31'
         });        
-        browser.visit("http://localhost:3000/auth/dropbox/start")
+        browser.visit("http://localhost:3000/auth/dropbox/start?test=blah&other=test")
         .then(function () {
             // Fill email, password and submit form
             return browser.
