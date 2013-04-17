@@ -100,14 +100,12 @@ describe('oauth flow', function() {
         });
         browser.visit("http://localhost:3000/auth/box/start?test=blah&other=test")
             .then(function () {
-                console.log('Fill email and pass');
                 // Fill email, password and submit form
                 return browser.
                     fill("login",        "m8r-sphnmi@mailinator.com").
                     fill("password",     "test123").
                     pressButton("Log In");
             }).then(function() {
-                console.log('Press Allow');
                 return browser.
                     pressButton('Allow');
             }).then(function() {
