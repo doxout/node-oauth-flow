@@ -5,6 +5,9 @@ var http = require('http');
 
 var oauthFlow = require('../index.js');
 
+var expect = require('chai').expect;
+
+
 describe('oauth flow', function() {
     var app, browser, server;
 
@@ -25,7 +28,7 @@ describe('oauth flow', function() {
 
 
     it('should work for oauth 1.0 on dropbox', function(done) {
-       
+
        var flow = oauthFlow({
             provider: {
                 requestTokenUrl: "https://api.dropbox.com/1/oauth/request_token",
@@ -39,34 +42,79 @@ describe('oauth flow', function() {
                 appSecret: "qjuo453q0z9ss6i"
             }
         }, function (req, res) {
-            console.log(req.oauth);
+            expect(req.query).to.have.property('test');
+            expect(req.query).to.have.property('other');
+            expect(req.oauth).to.have.property('oauth_access_token_secret');
+            expect(req.oauth).to.have.property('oauth_access_token');
             res.end('done');
             done();
         });
 
         app.use('/auth/dropbox', flow);
-       
+
         var browser = new zombie({
             userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31'
-        });        
-        browser.visit("http://localhost:3000/auth/dropbox/start")
+        });
+        browser.visit("http://localhost:3000/auth/dropbox/start?test=blah&other=test")
         .then(function () {
-            console.log("step 1");
             // Fill email, password and submit form
             return browser.
-                fill("login_email",  "m8r-sphnmi@mailinator.com").
+                fill("login_email",        "m8r-sphnmi@mailinator.com").
                 fill("login_password",     "test123").
                 pressButton("Sign in");
 
         }).then(function() {
-            console.log("step 2");
             return browser.
                 pressButton('Allow');
         }).then(function() {
-            console.log("step 3");
+
         }, function(err) {
             throw err;
-        }); 
+        });
+
+    });
+    it('should work for oauth 2.0 on box', function(done) {
+        var flow = oauthFlow({
+            provider: {
+                authorizationUrl: "https://www.box.com/api/oauth2/authorize",
+                accessTokenUrl: "https://www.box.com/api/oauth2/token",
+                version: "2.0"
+            },
+            user: {
+                clientId: "jh439ip7nipzmrzatsaxgqlx6ckri7fv",
+                clientSecret: "VB9LURI0dSzilO63Wpl6xJzQfrY8DOu8"
+            }
+        }, function (req, res) {
+            expect(req.query).to.have.property('test');
+            expect(req.query).to.have.property('other');
+            expect(req.oauth).to.have.property('oauth_access_token');
+            expect(req.oauth).to.have.property('oauth_refresh_token');
+            res.end('done');
+            done();
+        });
+
+        app.use('/auth/box', flow);
+
+        var browser = new zombie({
+            userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31'
+        });
+        browser.visit("http://localhost:3000/auth/box/start?test=blah&other=test")
+            .then(function () {
+                console.log('Fill email and pass');
+                // Fill email, password and submit form
+                return browser.
+                    fill("login",        "m8r-sphnmi@mailinator.com").
+                    fill("password",     "test123").
+                    pressButton("Log In");
+            }).then(function() {
+                console.log('Press Allow');
+                return browser.
+                    pressButton('Allow');
+            }).then(function() {
+
+            }, function(err) {
+                throw err;
+            });
 
     });
     after(function(done) {
