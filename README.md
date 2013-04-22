@@ -36,17 +36,17 @@ endpoint, for example, at:
 
 * `/auth/dropbox`
 
-WPoint the user to /auth/dropbox when you want them to authorize to
+Point the user to /auth/dropbox when you want them to authorize to
 the app. You can add your own custom parameters to the url.
 
 After the user authorizes your app, he will be redirected back to `/auth/dropbox`
 There, oauth-flow will put the authorization parameters in req.oauth then
-call your custom middleware. Custom parameters from `/auth/dropbox/start` will
-also be passed.
+call your custom middleware. Custom parameters that were passed when you sent the
+user to `/auth/dropbox/` will also be passed when returning.
 
 What you do afterwards with the authorization data is entirely up to you.
 You may create a new user, authenticate a user, add their account or do
 something entirely different. You can redirect them to the original URL, or
 alternaively if you opened the authorization dialog in a new window, simply
-send a script to close the window.
-
+send a script to close the window - oauth-flow doesn't limit you to any particular
+use.
