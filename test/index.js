@@ -101,7 +101,8 @@ describe('oauth flow', function() {
         app.use('/auth/box', flow);
 
         var browser = new zombie({
-            userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31'
+            userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31',
+            debug: true
         });
         browser.visit("http://localhost:3000/auth/box?test=blah&other=test")
         //browser.visit("http://localhost:3000/auth/box/start?test=blah&other=test")
