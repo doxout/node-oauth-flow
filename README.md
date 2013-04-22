@@ -31,16 +31,15 @@ app.use('/auth/dropbox', oauthFlow({
 ```
 
 This middleware doesn't assume that you wish to use it for user authentication.
-Instead, it only implements the oAuth authorization flow. What it does is
-install 2 routes:
+Instead, it only implements the oAuth authorization flow by creating a single
+endpoint, for example, at:
 
-* `/auth/dropbox/start`
-* `/auth/dropbox/end`
+* `/auth/dropbox`
 
-Point the user to /auth/dropbox/start when you want them to authorize to
-the app. You can add custom parameters to the url.
+WPoint the user to /auth/dropbox when you want them to authorize to
+the app. You can add your own custom parameters to the url.
 
-After the user authorizes your app, he will be redirected to `/auth/dropbox/end`
+After the user authorizes your app, he will be redirected back to `/auth/dropbox`
 There, oauth-flow will put the authorization parameters in req.oauth then
 call your custom middleware. Custom parameters from `/auth/dropbox/start` will
 also be passed.
@@ -50,10 +49,4 @@ You may create a new user, authenticate a user, add their account or do
 something entirely different. You can redirect them to the original URL, or
 alternaively if you opened the authorization dialog in a new window, simply
 send a script to close the window.
-
-# todo
-
-* make it a regular single-URL middleware which can be installed on an app.router
-* add oauth 2.0 support.
-
 
