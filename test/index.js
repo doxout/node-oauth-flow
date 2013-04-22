@@ -55,8 +55,10 @@ describe('oauth flow', function() {
         var browser = new zombie({
             userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31'
         });
-        browser.visit("http://localhost:3000/auth/dropbox/start?test=blah&other=test")
+        //browser.visit("http://localhost:3000/auth/dropbox/start?test=blah&other=test")
+        browser.visit("http://localhost:3000/auth/dropbox?test=blah&other=test")
         .then(function () {
+            //console.log("redirected, filling data");
             // Fill email, password and submit form
             return browser.
                 fill("login_email",        "m8r-sphnmi@mailinator.com").
@@ -64,9 +66,11 @@ describe('oauth flow', function() {
                 pressButton("Sign in");
 
         }).then(function() {
+            //console.log("allowing the use");
             return browser.
                 pressButton('Allow');
         }).then(function() {
+            //console.log("redirected back");
 
         }, function(err) {
             throw err;
@@ -74,6 +78,7 @@ describe('oauth flow', function() {
 
     });
     it('should work for oauth 2.0 on box', function(done) {
+        //return done();
         var flow = oauthFlow({
             provider: {
                 authorizationUrl: "https://www.box.com/api/oauth2/authorize",
@@ -98,18 +103,21 @@ describe('oauth flow', function() {
         var browser = new zombie({
             userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31'
         });
-        browser.visit("http://localhost:3000/auth/box/start?test=blah&other=test")
+        browser.visit("http://localhost:3000/auth/box?test=blah&other=test")
+        //browser.visit("http://localhost:3000/auth/box/start?test=blah&other=test")
             .then(function () {
+                console.log("Redirected, filling up text");
                 // Fill email, password and submit form
                 return browser.
                     fill("login",        "m8r-sphnmi@mailinator.com").
                     fill("password",     "test123").
                     pressButton("Log In");
             }).then(function() {
+                console.log("Logged in, trying to alllow app");
                 return browser.
                     pressButton('Allow');
             }).then(function() {
-
+                console.log("Done, redirecting back");
             }, function(err) {
                 throw err;
             });
