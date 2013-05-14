@@ -1,5 +1,5 @@
 {
-  "name": "oauth-flow",
+  "name": "node-oauth-flow",
   "version": "0.0.0",
   "description": "OAuth flow module",
   "main": "index.js",
