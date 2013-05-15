@@ -30,6 +30,15 @@ app.use('/auth/dropbox', oauthFlow({
 }));
 ```
 
+Alternatively you can omit the callback and in express do something like:
+
+app.get('/auth/dropbox', oauthFlow({...}), function(req, res) {
+    // req.oauth contains oauth_token, oauth_token_secret, oauth_access_token,
+    // and oauth_access_token_secret
+    res.end('done');
+});
+
+
 This middleware doesn't assume that you wish to use it for user authentication.
 Instead, it only implements the oAuth authorization flow by creating a single
 endpoint, for example, at:

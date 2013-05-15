@@ -41,7 +41,10 @@ describe('oauth flow', function() {
                 appKey: "pmp04j615brrckx",
                 appSecret: "qjuo453q0z9ss6i"
             }
-        }, function (req, res) {
+        });
+        app.use('/auth/dropbox', flow);
+        app.use('/auth/dropbox', function (req, res) {
+            console.log("Called dropbox after flow");
             expect(req.query).to.have.property('test');
             expect(req.query).to.have.property('other');
             expect(req.oauth).to.have.property('oauth_access_token_secret');
@@ -50,7 +53,6 @@ describe('oauth flow', function() {
             done();
         });
 
-        app.use('/auth/dropbox', flow);
 
         var browser = new zombie({
             userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.63 Safari/537.31'
