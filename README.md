@@ -1,8 +1,7 @@
 # node-oauth-flow
 
-Middleware for express or connect that implements 
-the authorization flow of oAuth. What you do with
-the authorization data is up to you.
+Middleware for express or connect that implements the authorization flow of
+oAuth. What you do with the authorization data is up to you.
 
 # example
 
@@ -10,7 +9,7 @@ Here is a working dropbox example
 
 ```js
 var oauthFlow = require('oauth-flow');
-
+app.use(express.session());
 app.use('/auth/dropbox', oauthFlow({
     provider: {
         requestTokenUrl: "https://api.dropbox.com/1/oauth/request_token",
@@ -61,3 +60,12 @@ something entirely different. You can redirect them to the original URL, or
 alternaively if you opened the authorization dialog in a new window, simply
 send a script to close the window - oauth-flow doesn't limit you to any particular
 use.
+
+# examples
+
+Look in tests for a working OAuth 2 example
+
+# license
+
+MIT
+
