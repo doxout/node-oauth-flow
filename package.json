@@ -1,6 +1,6 @@
 {
   "name": "oauth-flow",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Middleware for express or connect that implements the authorization flow of oAuth and passes the resulting tokens via req.oauth",
   "main": "index.js",
   "scripts": {
