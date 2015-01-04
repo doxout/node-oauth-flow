@@ -49,7 +49,7 @@ endpoint, for example, at:
 Point the user to /auth/dropbox when you want them to authorize to
 the app. You can add your own custom parameters to the url.
 
-After the user authorizes your app, he will be redirected back to `/auth/dropbox`
+After the user authorizes your app, they will be redirected back to `/auth/dropbox`
 There, oauth-flow will put the authorization parameters in req.oauth then
 call your custom middleware. Custom parameters that were passed when you sent the
 user to `/auth/dropbox/` will also be passed when returning.
