@@ -3,6 +3,10 @@
 Middleware for express or connect that implements the authorization flow of
 oAuth. What you do with the authorization data is up to you.
 
+# install
+
+`npm install --save oauth-flow`
+
 # example
 
 Here is a working dropbox example
